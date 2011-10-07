@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# by diversario <ilya.shaisultanov@gmail.com>
+#
+# This script adds few repos into apt,
+# installs CouchDB, Node, npm and log.io
+# under ~/local/
+#
+# If you use it and want to improve it - submit a pull request,
+# because I am by no means a shell expert.
+
 cd ~
 
 echo "\033[1;32mAdding more repos\033[0m"
