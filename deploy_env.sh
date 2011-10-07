@@ -3,7 +3,7 @@
 # by diversario <ilya.shaisultanov@gmail.com>
 #
 # This script adds few repos into apt,
-# installs CouchDB, Node, npm and log.io
+# installs zsh, oh-my-zsh, CouchDB, Node, npm and log.io
 # under ~/local/
 #
 # If you use it and want to improve it - submit a pull request,
@@ -20,7 +20,7 @@ echo "\033[1;32mInstalling ZShell\033[0m"
 sudo apt-get update
 sudo apt-get -y install zsh git
 wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-chsh ilya -s /bin/zsh
+chsh `whoami` -s /bin/zsh
 
 echo "\033[1;32mInstalling CouchDB, port 5984\033[0m"
 echo "\033[1;34mInstalling packages needed for CouchDB build\033[0m"
