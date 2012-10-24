@@ -1,0 +1,46 @@
+### BEGIN INIT INFO
+# Provides:          appjs
+# Required-Start:    $local_fs $syslog $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       appjs application start/stop control
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+NODE=/usr/local/bin/node
+APP_DIR=/var/www/appjs
+APP_PATH=server/app.js
+APP_NAME=app
+RUN_AS=nodejs
+
+test -x $NODE || exit 0
+
+function start_app {
+  if [ ! -f $APP_DIR/pids/$APP_NAME.pid ]; then
+    NODE_ENV=staging nohup authbind --deep $NODE $APP_DIR/$APP_PATH 1>>$APP_DIR/logs/$APP_NAME.log 2>&1 &
+    echo $! > $APP_DIR/pids/$APP_NAME.pid
+  else
+    echo "Process already running with PID `cat $APP_DIR/pids/$APP_NAME.pid`"
+    echo "PID file is '$APP_DIR/pids/$APP_NAME.pid'"
+  fi
+}
+
+function stop_app {
+  kill -s HUP `cat $APP_DIR/pids/$APP_NAME.pid`
+  rm $APP_DIR/pids/$APP_NAME.pid
+}
+
+case $1 in
+   start)
+      start_app ;;
+    stop)
+      stop_app ;;
+    restart)
+      stop_app
+      start_app
+      ;;
+    *)
+      echo "usage: $APP_NAME {start|stop}" ;;
+esac
+exit 0
+
