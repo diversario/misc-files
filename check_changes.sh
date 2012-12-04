@@ -27,27 +27,6 @@ function checkRepos() {
         
         echo "${statuses}" | sed 's/ /\n/g' | sort | uniq | tr "\\n" " " # get all unique status values
         echo ""
-        #statuses="`echo "${statuses}" | sed 's/ /\n/g' | sort | uniq`" # get all unique status values
-        #statuses="`echo "${statuses}" | sed 's/ /\n/g'`" # line per status
-        
-        #local repoStatus='';
-        
-        #while read -r line; do
-        #  [[ "${line}" =~ ([CAR\?MUD\!])+ ]]
-        #  local s="${BASH_REMATCH[1]}";
-        #  
-        #  case $s in
-        #    A) echo -n "added ";;
-        #    M) echo -n "modified ";;
-        #    D) echo -n "deleted ";;
-        #    R) echo -n "renamed ";;
-        #    C) echo -n "copied ";;
-        #    U) echo -n "updated ";;
-        #    ?) echo -n "untracked ";;
-        #  esac
-        #done <<< "${statuses}"
-        #
-        #echo "";
       fi
       
       if [ "${status}" == "" ]; then
