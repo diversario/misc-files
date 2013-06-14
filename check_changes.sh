@@ -1,5 +1,10 @@
 #!/bin/bash
 
+YELLOW="\033[0;33m"
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+NO_COLOR="\033[0m"
+
 function checkRepos() {
   local cwd=$1
   local files=`ls $cwd`
@@ -12,11 +17,11 @@ function checkRepos() {
       local status=`git status -bs 2>/dev/null`
 
       if [ `echo "${status}" | grep -E "${commits}" | wc -l` != 0 ]; then
-        echo -e "\E[33;1m$file\E[0m has local commits.";
+        echo -e "$YELLOW$file$NO_COLOR has local commits.";
       fi
       
       if [ `echo "${status}" | grep -E "${changes}" | wc -l` != 0 ]; then
-        echo -en "\E[31;1m$file\E[0m has changes:";
+        echo -en "$RED$file$NO_COLOR has changes: ";
 
         local statuses='';
                 
